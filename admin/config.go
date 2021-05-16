@@ -14,6 +14,14 @@ type MainConfig struct {
 		Password string
 		DBName   string
 	}
+	AWS struct {
+		SecretAcessKey string
+		AcessKey       string
+		Password       string
+		UserName       string
+		BucketName     string
+		Region         string
+	}
 }
 
 var MainConfigValue *MainConfig

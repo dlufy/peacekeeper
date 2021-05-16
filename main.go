@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/dlufy/peacekeeper/admin"
+	"github.com/dlufy/peacekeeper/aws"
 	"github.com/dlufy/peacekeeper/database"
 	"github.com/dlufy/peacekeeper/routes"
 )
@@ -13,6 +14,7 @@ import (
 func main() {
 	fmt.Println("it's peace Keeper's Hub / Heart")
 	admin.Initialize("./admin/peacekeeper.ini")
+	aws.Initialize()
 	//import route handler
 	routes.HandleHttpRequests()
 

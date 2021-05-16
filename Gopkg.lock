@@ -2,26 +2,60 @@
 
 
 [[projects]]
-  digest = "1:36056dbc579a2a195fc12eee3bbf9f16e6176636cf838d36aec1bb2dd993df0f"
+  digest = "1:9fd617c6b55799c1f4a8b667f0dbee61cc7d06bfed1a9a825411075bd3f58d9d"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
+    "aws/arn",
     "aws/awserr",
     "aws/awsutil",
+    "aws/client",
     "aws/client/metadata",
+    "aws/corehandlers",
     "aws/credentials",
+    "aws/credentials/ec2rolecreds",
+    "aws/credentials/endpointcreds",
+    "aws/credentials/processcreds",
+    "aws/credentials/ssocreds",
+    "aws/credentials/stscreds",
+    "aws/csm",
+    "aws/defaults",
+    "aws/ec2metadata",
     "aws/endpoints",
     "aws/request",
+    "aws/session",
     "aws/signer/v4",
     "internal/context",
     "internal/ini",
+    "internal/s3shared",
+    "internal/s3shared/arn",
+    "internal/s3shared/s3err",
     "internal/sdkio",
     "internal/sdkmath",
+    "internal/sdkrand",
+    "internal/sdkuri",
     "internal/shareddefaults",
     "internal/strings",
     "internal/sync/singleflight",
+    "private/checksum",
     "private/protocol",
+    "private/protocol/eventstream",
+    "private/protocol/eventstream/eventstreamapi",
+    "private/protocol/json/jsonutil",
+    "private/protocol/jsonrpc",
+    "private/protocol/query",
+    "private/protocol/query/queryutil",
     "private/protocol/rest",
+    "private/protocol/restjson",
+    "private/protocol/restxml",
+    "private/protocol/xml/xmlutil",
+    "service/s3",
+    "service/s3/s3iface",
+    "service/s3/s3manager",
+    "service/sso",
+    "service/sso/ssoiface",
+    "service/sts",
+    "service/sts/stsiface",
   ]
   pruneopts = "UT"
   revision = "5e25a0df58fcf539474e7a376cc2ab57b3e7efd6"
@@ -206,6 +240,10 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/aws/aws-sdk-go/aws",
+    "github.com/aws/aws-sdk-go/aws/session",
+    "github.com/aws/aws-sdk-go/service/s3",
+    "github.com/aws/aws-sdk-go/service/s3/s3manager",
     "go.mongodb.org/mongo-driver/bson",
     "go.mongodb.org/mongo-driver/mongo",
     "go.mongodb.org/mongo-driver/mongo/options",
