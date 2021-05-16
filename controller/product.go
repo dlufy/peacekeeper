@@ -2,8 +2,10 @@ package controller
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 
@@ -22,11 +24,29 @@ func HandleUploadRequest(res http.ResponseWriter, req *http.Request) (data inter
 		_, err = aws.DownloadFileFromS3(fileURL, fileName, "", core.GetConfig().AWS.BucketName)
 		return "", err
 	case "POST":
+
+		imageURL := req.FormValue("imageURL")
+		if imageURL != "" {
+			res, err := http.Get(imageURL)
+			if err != nil {
+				log.Println("error while getting image from this URL", imageURL, err)
+				return "", err
+			}
+			tmp := strings.Split(imageURL, "/")
+			image := tmp[len(tmp)-1]
+			imageList := strings.Split(image, ".")
+			if len(imageList) != 2 {
+				return "", errors.New(fmt.Sprintf("image path is not correct %s", imageURL))
+			}
+			return aws.UploadFileToS3(res.Body, admin.GetConfig().AWS.BucketName, strings.ToLower(image), "image/"+imageList[1], "public-read")
+		}
 		file, header, err := req.FormFile("file")
+		if err != nil {
+			return "", err
+		}
 		tempList := strings.Split(strings.ToLower(header.Filename), ".")
 		fileExtension := tempList[len(tempList)-1]
-		url, err := aws.UploadFileToS3(file, admin.GetConfig().AWS.BucketName, strings.ToLower(header.Filename), "image/"+fileExtension, "public-read")
-		return url, err
+		return aws.UploadFileToS3(file, admin.GetConfig().AWS.BucketName, strings.ToLower(header.Filename), "image/"+fileExtension, "public-read")
 	}
 	return "", nil
 }

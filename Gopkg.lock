@@ -106,6 +106,14 @@
   version = "v0.9.1"
 
 [[projects]]
+  digest = "1:b400036f40bcc76631ca3005623fa708b5bb90cea61321ac4e1f866c005e6781"
+  name = "github.com/rs/xid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "efa678f304ab65d6d57eedcb086798381ae22206"
+  version = "v1.3.0"
+
+[[projects]]
   digest = "1:0e4d997532a1c11d2eb65a228c63f988c7be708125a315c68e9783284ba526bb"
   name = "github.com/xdg-go/pbkdf2"
   packages = ["."]
@@ -241,10 +249,13 @@
   analyzer-version = 1
   input-imports = [
     "github.com/aws/aws-sdk-go/aws",
+    "github.com/aws/aws-sdk-go/aws/credentials",
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/s3",
     "github.com/aws/aws-sdk-go/service/s3/s3manager",
+    "github.com/rs/xid",
     "go.mongodb.org/mongo-driver/bson",
+    "go.mongodb.org/mongo-driver/bson/primitive",
     "go.mongodb.org/mongo-driver/mongo",
     "go.mongodb.org/mongo-driver/mongo/options",
     "go.mongodb.org/mongo-driver/mongo/readpref",

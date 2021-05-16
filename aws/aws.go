@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/dlufy/peacekeeper/admin"
+	"github.com/rs/xid"
 )
 
 var (
@@ -43,6 +44,12 @@ func UploadFileToS3(file io.Reader, bucketName, Key, contentType, ACL string) (s
 			log.Printf("not able to initialize the uploader\n")
 			return "", errors.New("uploader is not initalized")
 		}
+	}
+	if Key == "" {
+		Key = "temp_" + xid.New().String()
+	}
+	if contentType == "" {
+		contentType = "image/png"
 	}
 	result, err := uploader.Upload(&s3manager.UploadInput{
 		Bucket:      aws.String(bucketName),
